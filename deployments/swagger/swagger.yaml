@@ -1,0 +1,75 @@
+definitions:
+  ui.FizzBuzzRequestParams:
+    properties:
+      int1:
+        type: integer
+      int2:
+        type: integer
+      limit:
+        type: integer
+      str1:
+        type: string
+      str2:
+        type: string
+    required:
+    - int1
+    - int2
+    - limit
+    - str1
+    - str2
+    type: object
+  ui.StatsResponse:
+    properties:
+      hits:
+        type: integer
+      topRequest:
+        $ref: '#/definitions/ui.FizzBuzzRequestParams'
+    type: object
+info:
+  contact: {}
+paths:
+  /fizzbuzz:
+    post:
+      consumes:
+      - application/json
+      description: Generate 'FizzBuzz' array
+      operationId: fizzbuzz
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Generate 'FizzBuzz' array
+  /stats:
+    post:
+      consumes:
+      - application/json
+      description: Get top FizzBuzz request and total hits
+      operationId: top-requests
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ui.StatsResponse'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Get top FizzBuzz request and total hits
+swagger: "2.0"

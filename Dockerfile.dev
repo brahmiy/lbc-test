@@ -1,0 +1,8 @@
+FROM golang:1.19
+
+WORKDIR /test-leboncoin
+
+ENV GO111MODULE=on
+
+# Download modd for app hot reloading
+RUN go install github.com/cortesi/modd/cmd/modd@latest
